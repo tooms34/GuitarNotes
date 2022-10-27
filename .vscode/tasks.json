@@ -1,0 +1,17 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "ninja build",
+            "command": "ninja",
+            "options": {
+                "cwd": "${workspaceRoot}/out"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+              }
+        }
+    ],
+    "version": "2.0.0"
+}
