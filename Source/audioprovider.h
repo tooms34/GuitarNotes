@@ -13,7 +13,9 @@ class AudioProvider : public juce::Component
 public:
     AudioProvider();
     ~AudioProvider()override;
-
+    void addListener(juce::ChangeListener*);
+    
+ 
 private:
     /* std::unique_ptr<juce::AudioFormatReaderSource> readerSource;
      */

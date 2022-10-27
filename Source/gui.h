@@ -3,6 +3,7 @@
 #include <JuceHeader.h>
 
 class Spectrogram;
+class SpatialSoundViewer;
 
 class Gui : public juce::Component
 {
@@ -10,9 +11,11 @@ public:
     Gui();
     ~Gui()override;
     void resized()override;
+    std::vector<juce::ChangeListener*> listeners()const;
 
 private:
     juce::FlexBox box;
     std::unique_ptr<Spectrogram> ampSpectrogram;
     std::unique_ptr<Spectrogram> phaseSpectrogram;
+    std::unique_ptr<SpatialSoundViewer> spatialSoundViewer;
 };

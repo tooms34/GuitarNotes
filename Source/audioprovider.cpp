@@ -12,7 +12,7 @@ AudioProvider::AudioProvider()
                                       });
     audioSourcePlayer.setSource(sinWave.get());
     audioDeviceManager.addAudioCallback(&audioSourcePlayer);
-
+  
     // audioSourcePlayer.setSource(&transportSource);
 }
 
@@ -22,4 +22,10 @@ AudioProvider::~AudioProvider()
 
     audioDeviceManager.removeAudioCallback(&audioSourcePlayer);
 }
+ 
+void AudioProvider::addListener(juce::ChangeListener* listener){
+    sinWave->addChangeListener(listener);
+}
+ 
+
  

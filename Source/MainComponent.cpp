@@ -5,15 +5,22 @@
 MainComponent::MainComponent()
 {
     setSize(600, 400);
+    addAndMakeVisible(&mainGui);
+    for(auto listener:mainGui.listeners()){
+        audioProvider.addListener(listener);
+    }
 }
 
 MainComponent::~MainComponent()
+
 {
 }
 
 //==============================================================================
 void MainComponent::paint(juce::Graphics &g)
 {
+    std::cout<<"test"<<mainGui.getWidth()<<std::endl;
+    juce::Component::paint(g);
     /*
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
@@ -25,9 +32,7 @@ void MainComponent::paint(juce::Graphics &g)
 
 void MainComponent::resized()
 {
-    // This is called when the MainComponent is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
+   juce::Component::resized();
 }
 
  
