@@ -14,13 +14,13 @@ Gui::Gui() : ampSpectrogram(std::make_unique<Spectrogram>()),
     phaseSpectrogram->color=juce::Colours::blue;
     addAndMakeVisible(phaseSpectrogram.get());
     addAndMakeVisible(controlsPanel.get());
-    controlsPanel->addChangeListener(spatialSoundViewer.get());
+    controlsPanel->addActionListener(spatialSoundViewer.get());
 
 }
 
 Gui::~Gui()
 {
-     controlsPanel->removeChangeListener(spatialSoundViewer.get());
+     controlsPanel->removeActionListener(spatialSoundViewer.get());
 }
 
 void Gui::resized()

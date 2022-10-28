@@ -19,6 +19,9 @@ SpatialSoundViewer::SpatialSoundViewer()
 
 void SpatialSoundViewer::changeListenerCallback(juce::ChangeBroadcaster *source)
 {
+    if (m_state==State::Pause){
+        return;
+    }
     auto sourceAudio = static_cast<SinWaveAudio *>(source);
     const auto sourceBuffer = sourceAudio->buffer();           
     const auto startTargetSample=sampleBuffer.getNumSamples();
@@ -30,6 +33,18 @@ void SpatialSoundViewer::changeListenerCallback(juce::ChangeBroadcaster *source)
     
     repaint();
 }
+
+
+
+void SpatialSoundViewer::actionListenerCallback(const juce::String &message)
+{
+    if (message=="Pause"){
+        m_state=(m_state==State::Pause)?State::Play:State::Pause;
+    }
+    
+    repaint();
+}
+
 
 void SpatialSoundViewer::paint(Graphics &g)
 {

@@ -26,7 +26,7 @@ void SinWaveAudio::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferT
         // std::cout<<"here0"<<std::endl;
     }
     sampleBuffer.makeCopyOf(*bufferToFill.buffer);
-    auto res=sampleBuffer.findMinMax (0, 0,sampleBuffer.getNumSamples());
+    //auto res=sampleBuffer.findMinMax (0, 0,sampleBuffer.getNumSamples());
      //std::cout<<"minmax Sinwave"<<res.getStart()<<"   "<<res.getEnd()<<std::endl;
     sendChangeMessage();
 }

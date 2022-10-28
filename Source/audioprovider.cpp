@@ -5,7 +5,7 @@ AudioProvider::AudioProvider()
 {
     sinWave = std::make_unique<SinWaveAudio>();
     juce::RuntimePermissions::request(juce::RuntimePermissions::recordAudio,
-                                      [this](bool granted)
+                                      [this](bool)
                                       {
                                          // int numInputChannels = granted ? 2 : 0;
                                           audioDeviceManager.initialise(0, 2, nullptr, true, {}, nullptr);

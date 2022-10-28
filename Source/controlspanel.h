@@ -6,7 +6,7 @@
 
 
 class ControlsPanel : public juce::Component,
-                      public juce::ChangeBroadcaster
+                      public juce::ActionBroadcaster
 {
 public:
 ControlsPanel();

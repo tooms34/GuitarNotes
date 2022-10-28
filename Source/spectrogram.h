@@ -16,16 +16,24 @@ private:
 };
 
 class SpatialSoundViewer : public juce::Component,
-                           public juce::ChangeListener
+                           public juce::ChangeListener,
+                           public juce::ActionListener
+
 {
+ enum class State{
+     Pause,
+     Play
+ };
 public:
     SpatialSoundViewer();
         
     void changeListenerCallback(juce::ChangeBroadcaster *source) override; 
+    void 	actionListenerCallback (const String &message) override;
 
     void 	paint (Graphics &) override;
 
     Path pathFromChannel (const float* data , size_t size)const;
  private:
     juce::AudioBuffer<float> sampleBuffer;
+    State m_state{State::Play};
 };

@@ -8,7 +8,7 @@ ControlsPanel::ControlsPanel()
   addAndMakeVisible(*pauseButton);
   
   pauseButton->onClick = [this]
-  { std::cout<<"pushed"; };
+  { sendActionMessage("Pause"); };
 
  
 }
