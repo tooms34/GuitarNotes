@@ -14,6 +14,7 @@ public:
     AudioProvider();
     ~AudioProvider()override;
     void addListener(juce::ChangeListener*);
+    void removeListener(juce::ChangeListener*);
     
  
 private:

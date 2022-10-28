@@ -8,7 +8,7 @@ MainComponent::MainComponent()
     addAndMakeVisible(&mainGui);
     for(auto listener:mainGui.listeners()){
         audioProvider.addListener(listener);
-    }
+    }    
 }
 
 MainComponent::~MainComponent()
@@ -21,7 +21,6 @@ MainComponent::~MainComponent()
 //==============================================================================
 void MainComponent::paint(juce::Graphics &g)
 {
-    std::cout<<"test"<<mainGui.getWidth()<<std::endl;
     juce::Component::paint(g);
     /*
     // (Our component is opaque, so we must completely fill the background with a solid colour)
@@ -34,6 +33,7 @@ void MainComponent::paint(juce::Graphics &g)
 
 void MainComponent::resized()
 {
+    mainGui.setBounds(getLocalBounds());
    juce::Component::resized();
 }
 

@@ -7,7 +7,7 @@ AudioProvider::AudioProvider()
     juce::RuntimePermissions::request(juce::RuntimePermissions::recordAudio,
                                       [this](bool granted)
                                       {
-                                          int numInputChannels = granted ? 2 : 0;
+                                         // int numInputChannels = granted ? 2 : 0;
                                           audioDeviceManager.initialise(0, 2, nullptr, true, {}, nullptr);
                                       });
     audioSourcePlayer.setSource(sinWave.get());
@@ -28,4 +28,8 @@ void AudioProvider::addListener(juce::ChangeListener* listener){
 }
  
 
+void AudioProvider::removeListener(juce::ChangeListener* listener){
+    sinWave->removeChangeListener(listener);
+}
+ 
  
