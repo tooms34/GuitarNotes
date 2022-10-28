@@ -7,11 +7,8 @@
             "options": {
                 "cwd": "${workspaceRoot}/out"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-              }
-        }
+            "group": "build"
+        }       
     ],
     "version": "2.0.0"
 }
