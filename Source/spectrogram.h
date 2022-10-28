@@ -20,11 +20,12 @@ class SpatialSoundViewer : public juce::Component,
 {
 public:
     SpatialSoundViewer();
-    void paint(juce::Graphics &g) override;
-    void changeListenerCallback(juce::ChangeBroadcaster *source) override;
+        
+    void changeListenerCallback(juce::ChangeBroadcaster *source) override; 
 
-private:
-    juce::AudioThumbnail thumbnail;
-    juce::AudioThumbnailCache thumbnailCache;
-    juce::AudioFormatManager formatManager;
+    void 	paint (Graphics &) override;
+
+    Path pathFromChannel (const float* data , size_t size)const;
+ private:
+    juce::AudioBuffer<float> sampleBuffer;
 };

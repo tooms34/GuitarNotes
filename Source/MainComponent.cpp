@@ -12,8 +12,10 @@ MainComponent::MainComponent()
 }
 
 MainComponent::~MainComponent()
-
 {
+     for(auto listener:mainGui.listeners()){
+        audioProvider.removeListener(listener);
+    }
 }
 
 //==============================================================================

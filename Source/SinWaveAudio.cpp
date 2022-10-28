@@ -2,16 +2,15 @@
 
 SinWaveAudio::SinWaveAudio()
 {
+   //Timer::callAfterDelay(3000,[this](){std::cout<<"event"<<std::endl;amplitude=(amplitude==0.05)?0.2:0.05;});
+   
 }
 
 void SinWaveAudio::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill)
 {
     bufferToFill.clearActiveBufferRegion();
     auto originalPhase = phase;
-//std::cout<<"begin"<<std::endl;
 
-  const auto startTargetSample=sampleBuffer.getNumSamples();
-   sampleBuffer.setSize(bufferToFill.buffer->getNumChannels(),sampleBuffer.getNumSamples()+bufferToFill.numSamples,true,false,true);
     for (auto chan = 0; chan < bufferToFill.buffer->getNumChannels(); ++chan)
     {
         phase = originalPhase;
@@ -25,20 +24,12 @@ void SinWaveAudio::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferT
             phase = std::fmod(phase + phaseDelta, juce::MathConstants<float>::twoPi);
         }
         // std::cout<<"here0"<<std::endl;
-
-        sampleBuffer.addFrom(chan, startTargetSample, channelData, bufferToFill.numSamples);
-         // std::cout<<"here1"<<std::endl;
-        if (sampleBuffer.getNumSamples() / 1024 > oldValue)
-        {
-            auto res=sampleBuffer.findMinMax(chan,0,sampleBuffer.getNumSamples());
-            std::cout<<"here"<<res.getStart()<<"   "<<res.getEnd()<<std::endl;
-            oldValue = sampleBuffer.getNumSamples() / 1024;
-            sendChangeMessage();
-        }
     }
+    sampleBuffer.makeCopyOf(*bufferToFill.buffer);
+    auto res=sampleBuffer.findMinMax (0, 0,sampleBuffer.getNumSamples());
+     //std::cout<<"minmax Sinwave"<<res.getStart()<<"   "<<res.getEnd()<<std::endl;
+    sendChangeMessage();
 }
-
-
 
 void SinWaveAudio::prepareToPlay(int samplesPerBlockExpected, double newSampleRate)
 {
@@ -56,3 +47,11 @@ void SinWaveAudio::prepareToPlay(int samplesPerBlockExpected, double newSampleRa
         else
             paintIfFileLoaded (g, thumbnailBounds);
     }*/
+
+
+
+ const juce::AudioBuffer<float> & SinWaveAudio::buffer() const
+    {
+        
+        return sampleBuffer;
+    }
