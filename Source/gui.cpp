@@ -1,5 +1,6 @@
 #include "gui.h"
 #include "spectrogram.h"
+#include "spatialsoundviewer.h"
 #include "controlspanel.h"
 
 Gui::Gui() : ampSpectrogram(std::make_unique<Spectrogram>()),
@@ -14,7 +15,8 @@ Gui::Gui() : ampSpectrogram(std::make_unique<Spectrogram>()),
     phaseSpectrogram->color=juce::Colours::blue;
     addAndMakeVisible(phaseSpectrogram.get());
     addAndMakeVisible(controlsPanel.get());
-    controlsPanel->addActionListener(spatialSoundViewer.get());
+    controlsPanel->addActionListener(spatialSoundViewer.get()); 
+    spatialSoundViewer->setControlsPanelModel(controlsPanel->model()); 
 
 }
 

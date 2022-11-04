@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.16.0)
 set(Project_Name "GuitarNotes")
 project(${Project_Name} C CXX)
 
+set (CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
 
  
 #set(JUCE_DIR "/home/tooms/JUCE/cmake-build")
@@ -53,6 +54,7 @@ target_compile_definitions(${Project_Name}
             # GuiAppData            # If we'd created a binary data target, we'd link to it here
             juce::juce_gui_extra
             juce::juce_audio_basics
+            juce::juce_audio_utils
             juce::juce_audio_devices
             juce::juce_core
         PUBLIC
