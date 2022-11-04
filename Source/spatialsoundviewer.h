@@ -62,7 +62,8 @@ private:
     
     juce::AffineTransform fromPhysicsToGlobalMatrix;
     juce::AffineTransform fromGlobalToViewportMatrix;
-    juce::AffineTransform fromPhysicsToViewportMatrix;    
+    juce::AffineTransform fromPhysicsToViewportMatrix;  
+     juce::AffineTransform fromViewportToGlobalMatrix;    
 
     const int MaxGlobalY=1000;
     const int MinGlobalY=-1000;
