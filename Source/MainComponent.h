@@ -6,7 +6,7 @@
 #include "gui.h"
  
 
-
+class SampleModel;
 //==============================================================================
 /*
     This component lives inside our window, and this is where you should put all
@@ -28,6 +28,7 @@ private:
     // Your private member variables go here...
     AudioProvider audioProvider;
     Gui mainGui;
+    std::shared_ptr<SampleModel> sampleModel;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainComponent)
 };
 

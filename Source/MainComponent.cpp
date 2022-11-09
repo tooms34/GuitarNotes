@@ -1,23 +1,32 @@
 #include "MainComponent.h"
 #include "SinWaveAudio.h"
+#include "samplemodel.h"
 
 //==============================================================================
-MainComponent::MainComponent()
+MainComponent::MainComponent(): sampleModel(std::make_shared<SampleModel>())
 {
     setSize(600, 400);
     addAndMakeVisible(&mainGui);
-    for(auto listener:mainGui.listeners()){
-        audioProvider.addListener(listener);
-    }    
+
+     
+    mainGui.addListener(audioProvider.sourceAudio());
+
+    audioProvider.addListener(sampleModel.get());
+    
+     for(const auto item:mainGui.listeners()){
+        item->setModel(sampleModel);
+        sampleModel->addChangeListener(item);
+    }
 }
 
 MainComponent::~MainComponent()
 {
-     for(auto listener:mainGui.listeners()){
-        audioProvider.removeListener(listener);
-    }
+      
+        audioProvider.removeListener(sampleModel.get());
+    
 }
 
+ 
 //==============================================================================
 void MainComponent::paint(juce::Graphics &g)
 {

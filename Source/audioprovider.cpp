@@ -32,4 +32,6 @@ void AudioProvider::removeListener(juce::ChangeListener* listener){
     sinWave->removeChangeListener(listener);
 }
  
- 
+ ControlsPanelListener* AudioProvider::sourceAudio()const{
+     return static_cast<ControlsPanelListener*>(sinWave.get());
+ }

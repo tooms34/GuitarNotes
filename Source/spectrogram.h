@@ -1,17 +1,24 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "samplemodel.h"
 
  
-class Spectrogram : public juce::Component
+class Spectrogram : public juce::Component,public SampleListener
 {
 public:
-    Spectrogram() = default;
-    void setData(std::vector<float> &&data);
+    Spectrogram();
+    ~Spectrogram()override;
+   
     void paint(juce::Graphics &g) override;
 
     juce::Colour color;
 
-private:
-    std::vector<float> m_data;
+    void changeListenerCallback(juce::ChangeBroadcaster *)override;
+
+private:    
+    static constexpr size_t fftSize=1<<10;
+    std::vector<float> m_fftData;
+    dsp::FFT forwardFFT;
+    juce::Image spectrogramImage;
 }; 

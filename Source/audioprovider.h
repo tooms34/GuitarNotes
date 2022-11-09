@@ -6,6 +6,7 @@
 
  
  class SinWaveAudio;
+ class ControlsPanelListener;
 
 
 class AudioProvider : public juce::Component
@@ -15,7 +16,7 @@ public:
     ~AudioProvider()override;
     void addListener(juce::ChangeListener*);
     void removeListener(juce::ChangeListener*);
-    
+    ControlsPanelListener* sourceAudio()const;
  
 private:
     /* std::unique_ptr<juce::AudioFormatReaderSource> readerSource;

@@ -1,13 +1,18 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "controlspanellistener.h"
+
+#include "samplemodel.h"
 
 struct ControlsPanelModel;
  
+
+
+
 class SpatialSoundViewer : public juce::Component,
-                           public juce::ChangeListener,
-                           public juce::ActionListener
-                           
+                           public SampleListener,
+                           public ControlsPanelListener
 
 {
     enum class State
@@ -26,7 +31,8 @@ class SpatialSoundViewer : public juce::Component,
 public:
     SpatialSoundViewer();
 
-    void setControlsPanelModel(std::shared_ptr<ControlsPanelModel> model);
+    void setControlsPanelModel(std::shared_ptr<ControlsPanelModel> model)override;
+    
 
     void changeListenerCallback(juce::ChangeBroadcaster *source) override;
     void actionListenerCallback(const String &message) override;
@@ -49,7 +55,7 @@ private:
     
 
 private:
-    juce::AudioBuffer<float> sampleBuffer;
+   
     State m_state{State::Play};
     DrawMode m_drawMode = DrawMode::Points;
     juce::Rectangle<int> m_rectangleViewport;
@@ -58,8 +64,7 @@ private:
     //const std::pair<float,float> 
     //std::pair<int, int> m_sampleRange = {0, 10239};
     //std::pair<float, float> m_amplitudeRange = {-1, 1};
-    std::shared_ptr<ControlsPanelModel> m_controlModel;
-    
+     
     juce::AffineTransform fromPhysicsToGlobalMatrix;
     juce::AffineTransform fromGlobalToViewportMatrix;
     juce::AffineTransform fromPhysicsToViewportMatrix;  

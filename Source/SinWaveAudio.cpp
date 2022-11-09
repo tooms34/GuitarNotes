@@ -26,27 +26,16 @@ void SinWaveAudio::getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferT
         // std::cout<<"here0"<<std::endl;
     }
     sampleBuffer.makeCopyOf(*bufferToFill.buffer);
-    //auto res=sampleBuffer.findMinMax (0, 0,sampleBuffer.getNumSamples());
-     //std::cout<<"minmax Sinwave"<<res.getStart()<<"   "<<res.getEnd()<<std::endl;
     sendChangeMessage();
 }
 
 void SinWaveAudio::prepareToPlay(int samplesPerBlockExpected, double newSampleRate)
 {
+    m_sampleRate=newSampleRate;   
     std::cout << "sample" << newSampleRate << "samples:" << samplesPerBlockExpected << std::endl;
-    phaseDelta = (float)(juce::MathConstants<double>::twoPi * frequency / newSampleRate);
+    phaseDelta = (float)(juce::MathConstants<double>::twoPi * frequency / m_sampleRate);
 }
 
-/*
-   void SinWaveAudio::paint (juce::Graphics& g)
-    {
-        juce::Rectangle<int> thumbnailBounds (10, 100, getWidth() - 20, getHeight() - 120);
-
-        if (thumbnail.getNumChannels() == 0)
-            paintIfNoFileLoaded (g, thumbnailBounds);
-        else
-            paintIfFileLoaded (g, thumbnailBounds);
-    }*/
 
 
 
@@ -55,3 +44,18 @@ void SinWaveAudio::prepareToPlay(int samplesPerBlockExpected, double newSampleRa
         
         return sampleBuffer;
     }
+
+double SinWaveAudio::sampleRate()const{
+
+    return m_sampleRate;
+}
+
+
+void SinWaveAudio::actionListenerCallback(const juce::String &message)
+{
+    if (message == "Frequency")
+    {      
+        frequency=float(m_controlModel->frequency);    
+        phaseDelta = (float)(juce::MathConstants<double>::twoPi * frequency / m_sampleRate);
+    }
+}
