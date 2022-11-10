@@ -9,7 +9,6 @@ struct ControlsPanelModel;
  
 
 
-
 class SpatialSoundViewer : public juce::Component,
                            public SampleListener,
                            public ControlsPanelListener

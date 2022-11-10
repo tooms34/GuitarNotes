@@ -8,6 +8,7 @@ class SpatialSoundViewer;
 class ControlsPanel;
 class ControlsPanelListener;
 class SampleListener;
+class SampleModelHandler;
 
  
 class Gui : public juce::Component
@@ -28,6 +29,7 @@ private:
     std::unique_ptr<Spectrogram> phaseSpectrogram;
     std::unique_ptr<SpatialSoundViewer> spatialSoundViewer;
     std::unique_ptr<ControlsPanel> m_controlsPanel;
+    std::unique_ptr<SampleModelHandler> m_sampleModelHandler;
 };
 
 

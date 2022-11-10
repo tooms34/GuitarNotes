@@ -11,12 +11,14 @@ SpatialSoundViewer::SpatialSoundViewer()
 
 void SpatialSoundViewer::changeListenerCallback(juce::ChangeBroadcaster *)
 {
+      std::cout<<"before changed"<<std::endl;
     if (m_state == State::Pause)
     {
         return;
     }
-
-    const auto &sampleBuffer = m_model->sampleBuffer();
+    std::cout<<"has changed"<<std::endl;
+    const auto sampleBuffer = m_model->sampleBuffer();
+    std::cout<<"after has changed"<<std::endl;
     const auto leftX = std::max(int(sampleBuffer.getNumSamples()) - int(windowsSize), 0);
     const auto rightX = sampleBuffer.getNumSamples();
     m_rectangleViewport = Rectangle<int>::leftTopRightBottom(leftX, MaxGlobalY, rightX, MinGlobalY);
@@ -32,7 +34,7 @@ void SpatialSoundViewer::actionListenerCallback(const juce::String &message)
     }
     else if (message == "ZoomH")
     {
-        const auto &sampleBuffer = m_model->sampleBuffer();
+        const auto sampleBuffer = m_model->sampleBuffer();
         // std::cout << "----->" << m_controlModel->zoomHValue;
         const auto center = m_rectangleViewport.getCentreX();
         // std::cout << "c->" << center << "  " << m_rectangleViewport.getX() << "  " << m_rectangleViewport.getRight() << std::endl;
@@ -54,6 +56,7 @@ void SpatialSoundViewer::actionListenerCallback(const juce::String &message)
 
 void SpatialSoundViewer::paint(Graphics &g)
 {
+    std::cout<<"paint spatial"<<std::endl;
     g.fillAll(juce::Colours::white);
 
     // auto channelHeight = r.getHeight() / (float) 2.0;
@@ -61,7 +64,7 @@ void SpatialSoundViewer::paint(Graphics &g)
     g.setColour(juce::Colours::red);
 
     const auto area = getLocalBounds();
-    const auto &sampleBuffer = m_model->sampleBuffer();
+    const auto sampleBuffer = m_model->sampleBuffer();
     // std::cout<<minAmp<< " "<<maxAmp<<std::endl;
     for (auto chan = 0; chan < sampleBuffer.getNumChannels(); ++chan)
     {

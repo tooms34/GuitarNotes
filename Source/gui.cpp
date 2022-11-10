@@ -2,11 +2,13 @@
 #include "spectrogram.h"
 #include "spatialsoundviewer.h"
 #include "controlspanel.h"
+#include "samplemodel.h"
 
 Gui::Gui() : ampSpectrogram(std::make_unique<Spectrogram>()),
              phaseSpectrogram(std::make_unique<Spectrogram>()),
              spatialSoundViewer(std::make_unique<SpatialSoundViewer>()),
-             m_controlsPanel(std::make_unique<ControlsPanel>())
+             m_controlsPanel(std::make_unique<ControlsPanel>()),
+             m_sampleModelHandler(std::make_unique<SampleModelHandler>())
 {
     setSize(600, 400);
     addAndMakeVisible(spatialSoundViewer.get());
@@ -16,6 +18,7 @@ Gui::Gui() : ampSpectrogram(std::make_unique<Spectrogram>()),
     addAndMakeVisible(phaseSpectrogram.get());
     addAndMakeVisible(m_controlsPanel.get());
     addListener(spatialSoundViewer.get());
+    addListener(m_sampleModelHandler.get());
  
 }
 
@@ -62,7 +65,7 @@ void Gui::resized()
 
 std::vector<SampleListener *> Gui::listeners() const
 {
-    return {static_cast<SampleListener *>(spatialSoundViewer.get()), static_cast<SampleListener *>(ampSpectrogram.get())};
+    return {static_cast<SampleListener *>(spatialSoundViewer.get()), static_cast<SampleListener *>(ampSpectrogram.get()),static_cast<SampleListener *>(m_sampleModelHandler.get())};
 }
 
 void Gui::addListener(ControlsPanelListener *listener)
